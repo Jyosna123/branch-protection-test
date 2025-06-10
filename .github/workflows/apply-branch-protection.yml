@@ -1,28 +1,11 @@
-name: Apply Branch Protection
-
-on:
-  workflow_dispatch:
-
-jobs:
-  apply-protection:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Install requests
-        run: pip install requests
-
       - name: Apply branch protection
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           python -c 'import os, requests
 token = os.environ.get("GH_TOKEN")
+if not token:
+    raise Exception("GH_TOKEN is not set")
 headers = {"Authorization": "token " + token, "Accept": "application/vnd.github.v3+json"}
 url = "https://api.github.com/repos/Jyosna123/Project/branches/master/protection"
 payload = {
