@@ -23,7 +23,7 @@ jobs:
         run: |
           python -c "
 import os, requests
-h = {'Authorization': f'token {os.environ['GH_TOKEN']}', 'Accept': 'application/vnd.github.v3+json'}
+h = {'Authorization': f'token {os.environ[\"GH_TOKEN\"]}', 'Accept': 'application/vnd.github.v3+json'}
 url = 'https://api.github.com/repos/Jyosna123/Project/branches/master/protection'
 payload = {
   'required_pull_request_reviews': {'dismiss_stale_reviews': True},
