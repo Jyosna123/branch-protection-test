@@ -1,5 +1,26 @@
+name: Apply Branch Protection
+
 on:
   workflow_dispatch:
+
+jobs:
+  apply-protection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Apply branch protection
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "import os
                 import requests
