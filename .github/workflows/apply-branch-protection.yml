@@ -36,7 +36,7 @@ jobs:
                 url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
 
                 payload = {
-                    'required_pull_request_reviews': {
+    'required_pull_request_reviews': {
                         'dismiss_stale_reviews': True
                     },
                     'enforce_admins': False,
