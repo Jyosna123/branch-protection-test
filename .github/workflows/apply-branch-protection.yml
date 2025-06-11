@@ -33,9 +33,9 @@ jobs:
     'Accept': 'application/vnd.github.v3+json'
 }
 
-url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
+                url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
 
-payload = {
+                payload = {
     'required_pull_request_reviews': {
         'dismiss_stale_reviews': True
     },
@@ -44,9 +44,9 @@ payload = {
     'required_status_checks': None
 }
 
-res = requests.put(url, headers=headers, json=payload)
+               res = requests.put(url, headers=headers, json=payload)
 
-print('Status:', res.status_code)
-print('Response:', res.text)
+               print('Status:', res.status_code)
+               print('Response:', res.text)
 " > script.py
           python script.py
