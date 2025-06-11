@@ -1,52 +1,36 @@
-name: Apply Branch Protection
-
-on:
-  workflow_dispatch:
-
-jobs:
-  apply-protection:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Install requests
-        run: pip install requests
-
-      - name: Apply branch protection
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "import os
-                import requests
-                import json
+import requests
+import json
 
-                token = os.environ.get('GH_TOKEN')
+token = os.environ.get('GH_TOKEN')
+if not token:
+    print('Error: GH_TOKEN is not set')
+    exit(1)
 
-                headers = {
+headers = {
     'Authorization': f'token {token}',
     'Accept': 'application/vnd.github.v3+json'
 }
 
-                url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
+url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
 
-                                payload = {
-                    'required_pull_request_reviews': {
-                        'dismiss_stale_reviews': True
-                    },
-                    'enforce_admins': False,
-                    'restrictions': None,
-                    'required_status_checks': None
-                }
+payload = {
+    'required_pull_request_reviews': {
+        'dismiss_stale_reviews': True
+    },
+    'enforce_admins': False,
+    'restrictions': None,
+    'required_status_checks': None
+}
 
-                res = requests.put(url, headers=headers, json=payload)
+res = requests.put(url, headers=headers, json=payload)
 
-                print('Status:', res.status_code)
-                print('Response:', res.text)
-                " > script.py
+print('Status:', res.status_code)
+try:
+    print('Response:', res.json())
+except Exception as e:
+    print('Failed to parse JSON response:', res.text)
+    print('Error:', str(e))
+" > script.py
           python script.py
