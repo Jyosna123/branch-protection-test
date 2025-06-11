@@ -20,7 +20,7 @@ jobs:
 
       - name: Apply branch protection
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ variables.GH_TOKEN }}
         run: |
           python -c "import os, requests, json
 token = os.environ.get('GH_TOKEN')
