@@ -35,18 +35,18 @@ jobs:
 
                 url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
 
-                payload = {
-    'required_pull_request_reviews': {
-    'dismiss_stale_reviews': True
-    },
+                                payload = {
+                    'required_pull_request_reviews': {
+                        'dismiss_stale_reviews': True
+                    },
                     'enforce_admins': False,
                     'restrictions': None,
                     'required_status_checks': None
-}
+                }
 
-res = requests.put(url, headers=headers, json=payload)
+                res = requests.put(url, headers=headers, json=payload)
 
-print('Status:', res.status_code)
-print('Response:', res.text)
-" > script.py
+                print('Status:', res.status_code)
+                print('Response:', res.text)
+                " > script.py
           python script.py
