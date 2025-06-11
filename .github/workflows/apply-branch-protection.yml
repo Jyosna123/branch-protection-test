@@ -23,12 +23,12 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "import os
-import requests
-import json
+                import requests
+                import json
 
-token = os.environ.get('GH_TOKEN')
+                token = os.environ.get('GH_TOKEN')
 
-headers = {
+                headers = {
     'Authorization': f'token {token}',
     'Accept': 'application/vnd.github.v3+json'
 }
