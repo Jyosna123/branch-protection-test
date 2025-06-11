@@ -34,7 +34,6 @@ jobs:
 }
 
                 url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
-
                                 payload = {
                     'required_pull_request_reviews': {
                         'dismiss_stale_reviews': True
@@ -47,6 +46,11 @@ jobs:
                 res = requests.put(url, headers=headers, json=payload)
 
                 print('Status:', res.status_code)
-                print('Response:', res.text)
+                try:
+                    print('Response:', res.json())
+                except Exception as e:
+                    print('Failed to parse JSON response:', res.text)
+                    print('Error:', str(e))
+
                 " > script.py
           python script.py
