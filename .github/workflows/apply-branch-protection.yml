@@ -23,30 +23,30 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "import os
-                import requests
-                import json
+import requests
+import json
 
-                token = os.environ.get('GH_TOKEN')
+token = os.environ.get('GH_TOKEN')
 
-                headers = {
+headers = {
     'Authorization': f'token {token}',
     'Accept': 'application/vnd.github.v3+json'
 }
 
-                url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
+url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
 
-                payload = {
+payload = {
     'required_pull_request_reviews': {
-                        'dismiss_stale_reviews': True
-                    },
-                    'enforce_admins': False,
-                    'restrictions': None,
-                    'required_status_checks': None
-                }
+        'dismiss_stale_reviews': True
+    },
+    'enforce_admins': False,
+    'restrictions': None,
+    'required_status_checks': None
+}
 
-                res = requests.put(url, headers=headers, json=payload)
+res = requests.put(url, headers=headers, json=payload)
 
-                print('Status:', res.status_code)
-                print('Response:', res.text)
-                " > script.py
-                          python script.py
+print('Status:', res.status_code)
+print('Response:', res.text)
+" > script.py
+          python script.py
