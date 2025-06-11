@@ -20,13 +20,33 @@ jobs:
 
       - name: Apply branch protection
         env:
-          GH_TOKEN: ${{ variables.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          python -c "import os, requests, json
+          python <<EOF
+import os
+import requests
+import json
+ 
 token = os.environ.get('GH_TOKEN')
-headers = {'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json'}
+ 
+headers = {
+    'Authorization': f'token {token}',
+    'Accept': 'application/vnd.github.v3+json'
+}
+ 
 url = 'https://api.github.com/repos/Jyosna123/Project/branches/main/protection'
-payload = {'required_pull_request_reviews': {'dismiss_stale_reviews': True}, 'enforce_admins': False, 'restrictions': None, 'required_status_checks': None}
+ 
+payload = {
+    'required_pull_request_reviews': {
+        'dismiss_stale_reviews': True
+    },
+    'enforce_admins': False,
+    'restrictions': None,
+    'required_status_checks': None
+}
+ 
 res = requests.put(url, headers=headers, json=payload)
+ 
 print('Status:', res.status_code)
-print('Response:', res.text)"
+print('Response:', res.text)
+EOF
